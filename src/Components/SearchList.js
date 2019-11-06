@@ -1,18 +1,43 @@
 import React, { Component } from "react";
 import SearchItem from "./SearchItem";
 
-const SearchItem = ({ results }) => {
-  return (
-    <div className="search-results">
-      <ul>
-        {results.map(item => (
-          <li>
-            <SearchItem item={item}></SearchItem>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+export default class SearchList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTitle: ""
+    };
+  }
 
-export default SearchItem;
+  searchTitleChanged = event =>
+    this.setState({
+      searchTitle: event.target.value
+    });
+  render() {
+    return (
+      <div className="search-results container">
+        <form>
+          <input
+            onChange={this.searchTitleChanged}
+            value={this.state.searchTitle}
+            className="form-control"
+          />
+          <button
+            onClick={() => this.props.searchGame(this.state.searchTitle)}
+            className="btn btn-primary"
+          >
+            Search
+          </button>
+        </form>
+
+        <ul>
+          {this.props.results.map(game => (
+            <li>
+              <SearchItem game={game}></SearchItem>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+}

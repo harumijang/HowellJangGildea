@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-const SearchItem = ({ item }) => {
+const SearchItem = ({ game }) => {
   return (
     <div className="search-item">
-      <a href="#">{item.name}</a>
+      <a href="#">{game.name}</a>
     </div>
   );
 };
