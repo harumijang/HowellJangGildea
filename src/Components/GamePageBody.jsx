@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const GamePageBody = ({game}) => {
     return (
@@ -18,3 +18,4 @@ const GamePageBody = ({game}) => {
     )
 }
 export default GamePageBody
+
