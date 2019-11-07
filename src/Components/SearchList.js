@@ -13,27 +13,26 @@ export default class SearchList extends React.Component {
     this.setState({
       searchTitle: event.target.value
     });
-   this.props.searchGame(this.state.searchTitle);
-  }
-
+    this.props.searchGame(this.state.searchTitle);
+  };
 
   render() {
     return (
       <div className="search-results container">
-            <form>
-              <input
-                onChange={this.searchTitleChanged}
-                value={this.state.searchTitle}
-                className="form-control"
-              />
-              <button
-                onClick={() => this.props.searchGame(this.state.searchTitle)}
-                className="btn btn-primary"
-              >
-                Search
-              </button>
-            </form>
-
+        <form>
+          <input
+            onChange={this.searchTitleChanged}
+            value={this.state.searchTitle}
+            className="form-control"
+          />
+          <button
+            type="button"
+            onClick={() => this.props.searchGame(this.state.searchTitle)}
+            className="btn btn-primary"
+          >
+            Search
+          </button>
+        </form>
 
         <ul>
           {this.props.results.map(game => (

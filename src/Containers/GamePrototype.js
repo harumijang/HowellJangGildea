@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchList from "../Components/SearchList";
 
+
 export default class GamePrototype extends Component {
   constructor(props) {
     super(props);

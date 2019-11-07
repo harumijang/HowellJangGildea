@@ -1,10 +1,20 @@
 import React, { Component } from "react";
+import { Route, Router, Link } from "react-router-dom";
+import GamePrototype from "../Containers/GamePrototype";
+
 
 const SearchItem = ({ game }) => {
   return (
-    <div className="search-item">
-      <a href="#">{game.name}</a>
-    </div>
+    <Router>
+      <div className="search-item">
+        <Route
+          path="game/:game.name"
+          render={() => <GamePrototype game={game} />}
+        >
+          {game.name}
+        </Route>
+      </div>
+    </Router>
   );
 };
 
