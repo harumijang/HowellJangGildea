@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import SearchList from "../Components/SearchList";
-
-
+import { BrowserRouter as Router } from "react-router-dom";
 export default class GamePrototype extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +29,9 @@ export default class GamePrototype extends Component {
 
   render() {
     return (
-      <SearchList searchGame={this.searchGame} results={this.state.games} />
+      <Router>
+        <SearchList searchGame={this.searchGame} results={this.state.games} />
+      </Router>
     );
   }
 }
