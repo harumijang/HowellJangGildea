@@ -16,7 +16,7 @@ const GamePageHeader = ({game}) => {
     </div>
     <div class="col-9">
          
-       <GamePageBody/>
+       <GamePageBody game={game}/>
     </div>
     <div class="col">
       
