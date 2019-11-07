@@ -11,9 +11,9 @@ const GamePageBody = ({game}) => {
            <p>ADD MORE STUFF HERE LATER</p>
             </div>
         </div>
-        <h1>Lead Dev:</h1>
-        <h1>Studio:</h1>
-        <h1>Publisher</h1>
+        <h3>Lead Dev:</h3>
+        <h3>Studio:</h3>
+        <h3>Publisher</h3>
         </div>
     )
 }
