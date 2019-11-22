@@ -4,13 +4,15 @@ import GamePrototype from "../Containers/GamePrototype";
 import GamePageHeader from "../Components/GamePageHeader";
 
 
-const SearchItem = ({ game }) => {
+const SearchItem = ({setCurrentGame, game }) => {
   return (
-      <div className="search-item">
-        <Link to="/game">{game.name}</Link>
-        <Route path="/game" render={() => <GamePageHeader game={game} />} />
+      <div  className="search-item">
+        <Link  to={`game/${game.name}`}>
+      {game.name}</Link>
+       
       </div>
   );
 };
 
 export default SearchItem;
+//onclick={() => setCurrentGame(game)}

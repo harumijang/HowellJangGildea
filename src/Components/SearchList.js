@@ -37,7 +37,7 @@ export default class SearchList extends React.Component {
         <ul>
           {this.props.results.map(game => (
             <li>
-              <SearchItem game={game}></SearchItem>
+              <SearchItem setCurrentGame={this.props.setCurrentGame} game={game}></SearchItem>
             </li>
           ))}
         </ul>
