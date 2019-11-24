@@ -39,7 +39,7 @@ const GamePageBody = ({game}) => {
         
         </div>
         <div class="d-flex">
-        <div>Genres:</div>
+       <strong> <div>Genres:&nbsp;</div></strong>
         {game.genres ? game.genres.map((genre, index) => {
                 if (index < game.genres.length-1) {
                     return (<div>{genre.name},&nbsp;</div>)
@@ -48,8 +48,8 @@ const GamePageBody = ({game}) => {
             </div>
         
             {game.released ? 
-                <div>Release Date: {parseDate(game.released)}</div> :
-                <div>Release Date:</div>}
+                <div class="d-flex"><strong><div>Release Date:&nbsp;</div> </strong><div>{parseDate(game.released)}</div></div> :
+               <strong> <div>Release Date:</div></strong>} 
        
         
         <div class="d-flex flex-column">
