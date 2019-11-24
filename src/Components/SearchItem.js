@@ -4,12 +4,17 @@ import GamePrototype from "../Containers/GamePrototype";
 import GamePageHeader from "../Components/GamePageHeader";
 
 
-const SearchItem = ({setCurrentGame, game }) => {
+const SearchItem = ({setCurrentGame, game}) => {
   return (
-      <div  className="search-item">
-        <Link  to={`game/${game.name}`}>
-      {game.name}</Link>
-       
+      <div className="search-item">
+        <Link to={
+            { 
+                pathname: '/game',
+                game: game
+            }
+        }>
+          {game.name}
+          </Link> 
       </div>
   );
 };

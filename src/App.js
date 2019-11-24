@@ -5,8 +5,6 @@ import GamePrototype from "../src/Containers/GamePrototype";
 import GamePageHeader from "./Components/GamePageHeader"
 import {  Route, Link } from "react-router-dom";
 import { BrowserRouter as Router } from "react-router-dom";
-import D from "./Components/d"
-import C from "./Components/c"
 
 class App extends React.Component {
     
@@ -16,7 +14,6 @@ class App extends React.Component {
 
     setCurrentGame (newGame) {
         this.setState({game: newGame})
-        console.log(this.state.currentGame)
     }
     
     render () {

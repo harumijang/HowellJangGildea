@@ -20,3 +20,27 @@
 .App-link {
   color: #09d3ac;
 }
+
+#header {
+    background-color:skyblue;
+    border-bottom: 2px solid black
+}
+.header6 {
+    margin-top: 7px;
+    padding: 2px;
+}
+
+#gamePage {
+    padding-top: 15px;
+}
+
+html, #gamePage, register, login {
+    background-color: aliceblue
+}
+
+.gamePageBody {
+    background-color: lightblue
+}
+#platformHead {
+    margin-bottom: -8px;
+}
