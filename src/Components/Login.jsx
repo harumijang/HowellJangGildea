@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom"
 
-const Head = () => {
+const Login = () => {
     return (
         <div class="container">
  <h1>Sign In</h1>
@@ -40,5 +40,5 @@ const Head = () => {
 </div>
     )
 }
-export default Head
+export default Login
 
