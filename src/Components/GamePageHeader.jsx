@@ -10,7 +10,6 @@ export default class GamePageHeader extends React.Component {
     };
   }
     render () {
-        {console.log(this.props)}
         return (
                 <div id="gamePage">
       <div id="title" class="d-flex justify-content-center">

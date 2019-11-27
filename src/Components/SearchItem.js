@@ -4,7 +4,7 @@ import GamePrototype from "../Containers/GamePrototype";
 import GamePageHeader from "../Components/GamePageHeader";
 
 
-const SearchItem = ({setCurrentGame, game}) => {
+const SearchItem = ({ game}) => {
   return (
       <div className="search-item">
         <Link to={

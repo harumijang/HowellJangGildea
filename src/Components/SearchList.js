@@ -25,7 +25,7 @@ export default class SearchList extends React.Component {
             value={this.state.searchTitle}
             className="form-control"
           />
-          <button
+          <button 
             type="button"
             onClick={() => this.props.searchGame(this.state.searchTitle)}
             className="btn btn-primary"
@@ -37,7 +37,7 @@ export default class SearchList extends React.Component {
         <ul>
           {this.props.results.map(game => (
             <li>
-              <SearchItem setCurrentGame={this.props.setCurrentGame} game={game}></SearchItem>
+              <SearchItem game={game}></SearchItem>
             </li>
           ))}
         </ul>

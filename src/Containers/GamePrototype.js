@@ -6,12 +6,15 @@ import {Route} from "react-router-dom"
 import GamePageHeader from "../Components/GamePageHeader";
 import Register from "../Components/Register";
 import Login from "../Components/Login";
+import Profile from "../Components/Profile";
+import Review from "../Components/Review";
 export default class GamePrototype extends Component {
   constructor(props) {
     super(props);
     this.state = {
       games: [],
-      game: null
+      game: null,
+      user: ""
     };
   }
 
@@ -26,9 +29,9 @@ export default class GamePrototype extends Component {
 
 //  searchGame = searchTitleChanged => this.findGameByTitle(searchTitleChanged);
 
-  setCurrentGame(newGame) {
+  setUser = username => {
       console.log('here')
-      this.setState({game: newGame});
+      this.setState({user: username});
   }
     
 
@@ -49,12 +52,13 @@ searchGame = searchTitleChanged => this.findGameByTitle(searchTitleChanged);
   render() {
     return (
         <Router>
-           <Head />
-            <Route exact path="/"><SearchList setCurrentGame={this.setCurrentGame} searchGame={this.searchGame} results={this.state.games} /></Route>
-            <Route path="/register"><Register /></Route>
-            <Route path="/login"><Login /></Route>
+             <Head setUser={this.setUser} username={this.state.user} /> 
+             <Route path="/review" render={(review) => { return (<Review review={review.location.review}/>)} }/>
+             <Route exact path="/"><SearchList searchGame={this.searchGame} results={this.state.games} /></Route>
+            <Route username={this.state.user} path="/register"><Register setUser={this.setUser} /></Route>
+            <Route path="/login"><Login  setUser={this.setUser}/></Route>
+            <Route  path="/profile"><Profile  username={this.state.user} setUser={this.setUser}/></Route>
              <Route path="/game" render={(game) => {
-                    console.log(game)
                     return (<GamePageHeader game={game.location.game} />)
                 }} />
         </Router>
