@@ -9,7 +9,7 @@ const SearchItem = ({ game}) => {
       <div className="search-item">
         <Link to={
             { 
-                pathname: '/game',
+                pathname: '/game/' + game.id,
                 game: game
             }
         }>

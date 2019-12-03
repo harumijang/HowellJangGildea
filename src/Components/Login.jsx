@@ -1,28 +1,61 @@
 import React from "react";
 import {Link} from "react-router-dom"
 
-const Login = ({setUser}) => {
+class Login extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {gamers:[],devs:[]}    
+  }
   
-  const authenticate = () => {
-    console.log(setUser)
+  componentDidMount() {
+    fetch("https://damp-hollows-38137.herokuapp.com/api/consumers")
+      .then(res => res.json())
+      .then(json => this.setState({ gamers: json }));
+    fetch("https://damp-hollows-38137.herokuapp.com/api/developers")
+      .then(res => res.json())
+      .then(json => this.setState({ devs: json }));
+  }
+   authenticate = () => {
     let un = document.getElementById("username").value;
     let pw = document.getElementById("password").value;
     
     
-    //Actual anuthentication done with database
+    //Actual anuthentication done with database 
+     /*
     if (un) {
-      setUser(un)
+      this.props.setUser(un)
     } else {
       alert("username required")
       return;
     }
+     */
+     console.log(this.state.gamers[0].username)
+     for (let i = 0; i < this.state.gamers.length; i++) {
+       if (un === this.state.gamers[i].username && pw === this.state.gamers[i].password) {
+         this.props.setUser(un)
+         document.getElementById("login").style.display = "block";
+        document.getElementById("authenticate").style.display = "none";
+         return;
+       }
+     }
+     for (let i = 0; i < this.state.devs.length; i++) {
+       if (un === this.state.devs[i].username && pw === this.state.devs[i].password) {
+         this.props.setUser(un)
+         document.getElementById("login").style.display = "block";
+        document.getElementById("authenticate").style.display = "none";
+         return;
+       }
+     }
+     
+     alert ("invalid login you dumb piece of trash")
     
-    document.getElementById("login").style.display = "block";
-    document.getElementById("authenticate").style.display = "none";
+    //document.getElementById("login").style.display = "block";
+    //document.getElementById("authenticate").style.display = "none";
     
   }
   
-    return (
+   render()  {
+   return (
         <div class="container">
  <h1>Sign In</h1>
  
@@ -46,7 +79,7 @@ const Login = ({setUser}) => {
    <div class="form-group row">
      <label class="col-sm-2 col-form-label"></label>
      <div class="col-sm-10">
-       <button onClick={() => authenticate()} id="authenticate"  class="btn btn-primary btn-block wbdv-login">Login</button>
+       <button onClick={() => this.authenticate()} id="authenticate"  class="btn btn-primary btn-block wbdv-login">Login</button>
          <Link to="/"><button style={{display:"none"}} id="login" class="btn btn-secondary btn-block wbdv-login">Return Home</button></Link>
        <div class="row">
          
@@ -58,7 +91,7 @@ const Login = ({setUser}) => {
    </div>
  
 </div>
-    )
+    )}
 }
 export default Login
 
