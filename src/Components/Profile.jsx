@@ -1,7 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom"
 
-const Profile = ({setUser, username}) => {
+const Profile = ({setUser, username, type}) => {
   
     const authenticate = () => {
     console.log(setUser)
@@ -53,6 +53,8 @@ const Profile = ({setUser, username}) => {
        <input type="password" class="form-control wbdv-field wbdv-password-verify"
            id="passwordVerify" placeholder="123qwe#$%"></input>
      </div>
+     {type == "dev" ?
+     <button class="btn btn-primary">Add Game</button>:null}
    </div>
    <div class="form-group row">
      <label class="col-sm-2 col-form-label"></label>

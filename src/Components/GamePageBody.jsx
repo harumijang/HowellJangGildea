@@ -56,6 +56,13 @@ class GamePageBody extends React.Component {
         temp += dateArr[0]
         return temp
     }
+     addReview = (type) => {
+       if (type != "gamer") {alert("fuck u");return;}
+       document.getElementById("addReview").style.display = "block"
+     }
+     submitReview = (r) => {
+       let review = {reviewContent: r}
+     }
     
     render(){
     return (
@@ -115,7 +122,20 @@ class GamePageBody extends React.Component {
         {this.removeFirstPicture().map(pic => {
                 return (<img height="108" width="192" src={pic.image}></img>)
             })}
-        <strong><h3>Reviews</h3></strong>
+        <div class="d-flex justify-content-between">
+          
+          
+          
+          <h3><strong>Reviews</strong></h3>
+          <button onClick={() => this.addReview(this.props.type)} class="btn btn-primary">Add Review</button>
+        </div>
+        <div id="addReview" style={{display:"none"}} >
+         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <button class="btn btn-primary">Submit</button>
+        </div>
+        
+        
+        
         {this.state.reviews.map((r, index) => {
          
           if (index < reviewsAllowedOnScreen) {

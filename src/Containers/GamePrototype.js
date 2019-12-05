@@ -8,13 +8,16 @@ import Register from "../Components/Register";
 import Login from "../Components/Login";
 import Profile from "../Components/Profile";
 import Review from "../Components/Review";
+import NewGame from "../Components/NewGame.jsx"
 export default class GamePrototype extends Component {
   constructor(props) {
     super(props);
     this.state = {
       games: [],
       game: null,
-      user: ""
+      user: "",
+      userType: "",
+      userId: 0
     };
   }
 
@@ -29,9 +32,9 @@ export default class GamePrototype extends Component {
 
 //  searchGame = searchTitleChanged => this.findGameByTitle(searchTitleChanged);
 
-  setUser = username => {
+  setUser = (username,type,userId) => {
       console.log('here')
-      this.setState({user: username});
+      this.setState({user: username, userType: type, id:userId});
   }
     
 
@@ -57,9 +60,10 @@ searchGame = searchTitleChanged => this.findGameByTitle(searchTitleChanged);
              <Route exact path="/"><SearchList searchGame={this.searchGame} results={this.state.games} /></Route>
             <Route username={this.state.user} path="/register"><Register setUser={this.setUser} /></Route>
             <Route path="/login"><Login  setUser={this.setUser}/></Route>
-            <Route  path="/profile"><Profile  username={this.state.user} setUser={this.setUser}/></Route>
+            <Route  path="/profile"><Profile type={this.state.userType} username={this.state.user} setUser={this.setUser}/></Route>
+            <Route path="/newGame"><NewGame userId={this.state.userId}/></Route>
              <Route path="/game" render={(game) => {
-                    return (<GamePageHeader game={game.location.game} />)
+                    return (<GamePageHeader type={this.state.userType} game={game.location.game} />)
                 }} />
         </Router>
 

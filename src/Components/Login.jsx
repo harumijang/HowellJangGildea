@@ -29,10 +29,9 @@ class Login extends React.Component {
       return;
     }
      */
-     console.log(this.state.gamers[0].username)
      for (let i = 0; i < this.state.gamers.length; i++) {
        if (un === this.state.gamers[i].username && pw === this.state.gamers[i].password) {
-         this.props.setUser(un)
+         this.props.setUser(un, "gamer", this.state.gamers[i].id)
          document.getElementById("login").style.display = "block";
         document.getElementById("authenticate").style.display = "none";
          return;
@@ -40,7 +39,7 @@ class Login extends React.Component {
      }
      for (let i = 0; i < this.state.devs.length; i++) {
        if (un === this.state.devs[i].username && pw === this.state.devs[i].password) {
-         this.props.setUser(un)
+         this.props.setUser(un, "dev", this.state.devs[i])
          document.getElementById("login").style.display = "block";
         document.getElementById("authenticate").style.display = "none";
          return;

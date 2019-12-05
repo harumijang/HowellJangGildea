@@ -47,9 +47,9 @@ export default class GamePageHeader extends React.Component {
           <div class="d-flex justify-content-around">
            <h1>{this.props.game.name}</h1>
             
-           <div class="d-flex"><h1>/5&nbsp;</h1><p>{this.props.game.rating}&nbsp;ratings</p></div>
+           <div class="d-flex"><h1>{this.props.game.rating}/5&nbsp;</h1><p>{this.props.game.ratings_count}&nbsp;ratings</p></div>
            </div>
-            <GamePageBody game={this.props.game} />
+            <GamePageBody type={this.props.type} game={this.props.game} />
           </div>
           <div class="col"></div>
         </div>
