@@ -23,6 +23,8 @@ class Register extends React.Component {
       } else {
         newUser = {username:u,password:p,reviews:[]}
       }
+    
+    console.log(newUser)
    
       fetch("https://damp-hollows-38137.herokuapp.com/api/" + type, {
          method: 'post',
@@ -80,6 +82,7 @@ class Register extends React.Component {
      }
        if (password.value === passwordV.value) {
          alert("Developer approved")
+         this.newAccount(un,password,"developers")
        } else {
          alert("passwords differ")
          

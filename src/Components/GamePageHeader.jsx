@@ -4,7 +4,6 @@ import React, { Component } from "react";
 
 
 export default class GamePageHeader extends React.Component {
-  gameId = 4828;
   constructor(props) {
     super(props);
     this.state = {
@@ -49,7 +48,7 @@ export default class GamePageHeader extends React.Component {
             
            <div class="d-flex"><h1>{this.props.game.rating}/5&nbsp;</h1><p>{this.props.game.ratings_count}&nbsp;ratings</p></div>
            </div>
-            <GamePageBody type={this.props.type} game={this.props.game} />
+            <GamePageBody userId={this.props.userId} type={this.props.type} game={this.props.game} />
           </div>
           <div class="col"></div>
         </div>

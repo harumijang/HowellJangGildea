@@ -31,22 +31,28 @@ class Login extends React.Component {
      */
      for (let i = 0; i < this.state.gamers.length; i++) {
        if (un === this.state.gamers[i].username && pw === this.state.gamers[i].password) {
+       
          this.props.setUser(un, "gamer", this.state.gamers[i].id)
          document.getElementById("login").style.display = "block";
         document.getElementById("authenticate").style.display = "none";
+         document.getElementById('username').disabled = true;
+         document.getElementById('password').disabled = true;
          return;
        }
      }
      for (let i = 0; i < this.state.devs.length; i++) {
        if (un === this.state.devs[i].username && pw === this.state.devs[i].password) {
          this.props.setUser(un, "dev", this.state.devs[i])
+       
          document.getElementById("login").style.display = "block";
         document.getElementById("authenticate").style.display = "none";
+         document.getElementById('username').disabled = true;
+         document.getElementById('password').disabled = true;
          return;
        }
      }
      
-     alert ("invalid login you dumb piece of trash")
+     alert ("Invalid Login")
     
     //document.getElementById("login").style.display = "block";
     //document.getElementById("authenticate").style.display = "none";

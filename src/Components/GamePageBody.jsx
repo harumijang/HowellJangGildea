@@ -57,11 +57,27 @@ class GamePageBody extends React.Component {
         return temp
     }
      addReview = (type) => {
-       if (type != "gamer") {alert("fuck u");return;}
+       if (type != "gamer") {alert("Please sign in with a consumer account");return;}
        document.getElementById("addReview").style.display = "block"
      }
-     submitReview = (r) => {
-       let review = {reviewContent: r}
+     
+     submitReview = (id) => {
+       let r = document.getElementById("rev").value
+       console.log(r)
+       let review = {id:111,reviewContent: r}
+       
+      fetch("https://damp-hollows-38137.herokuapp.com/api/reviews" , {
+         method: 'post',
+         body: JSON.stringify(review),
+         headers: {
+                'content-type': 'application/json'
+         }
+      });
+       
+       alert("review submitted")
+      // document.getElementById("addReview").style.display = "none"
+       
+       
      }
     
     render(){
@@ -129,10 +145,10 @@ class GamePageBody extends React.Component {
           <h3><strong>Reviews</strong></h3>
           <button onClick={() => this.addReview(this.props.type)} class="btn btn-primary">Add Review</button>
         </div>
-        <div id="addReview" style={{display:"none"}} >
-         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button class="btn btn-primary">Submit</button>
-        </div>
+        {this.props.userId ? <div id="addReview" style={{display:"none"}} >
+         <textarea class="form-control" id="rev" rows="3"></textarea>
+        <button onClick={() => this.submitReview()} class="btn btn-primary">Submit</button>
+        </div>:null}
         
         
         
