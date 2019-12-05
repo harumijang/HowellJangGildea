@@ -73,11 +73,10 @@ const NewGame = (devId) => {
    <div class="form-group row">
      <label class="col-sm-2 col-form-label"></label>
      <div class="col-sm-10">
-        <button onClick={() => createNewGame()} id="authenticate"  class="btn btn-primary btn-block wbdv-login">Register</button>
+        <button onClick={() => createNewGame()} id="authenticate"  class="btn btn-primary btn-block wbdv-login">Create New Game</button>
          <Link to="/"><button style={{display:"none"}} id="reg" class="btn btn-secondary btn-block wbdv-login">Return Home</button></Link>
        <div class="row">
          <div class="col-6">
-          <Link to="/login"><div >Sign in!</div></Link>
            
          </div>
          

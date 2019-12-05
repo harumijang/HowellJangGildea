@@ -54,7 +54,7 @@ const Profile = ({setUser, username, type}) => {
            id="passwordVerify" placeholder="123qwe#$%"></input>
      </div>
      {type == "dev" ?
-     <button class="btn btn-primary">Add Game</button>:null}
+           <Link to="/newGame"><button class="btn btn-primary">Add Game</button> </Link>:<button class="btn btn-primary">View Reviews</button>}
    </div>
    <div class="form-group row">
      <label class="col-sm-2 col-form-label"></label>
