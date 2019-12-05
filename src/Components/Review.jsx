@@ -12,7 +12,7 @@ const Review = (review, rGame) => {
                 pathname: '/game/' + rGame.id,
                 game: rGame
             }
-      }>FUCK ME </Link>
+      }>Return to Game </Link>
     
       <div class="d-flex justify-content-center"><h1>Review</h1> </div>
       <h6> <strong>User:</strong> {review.review.user}</h6>
