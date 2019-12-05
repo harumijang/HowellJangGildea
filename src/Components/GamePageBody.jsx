@@ -16,7 +16,7 @@ let r5 ={user:"Smoking Krills", text: "This game is bad go fuck yourself"}
 
 
 
-let reviews = [r1,r2,r3, r4, r5]
+// let reviews = [r1,r2,r3, r4, r5]
 const reviewsAllowedOnScreen = 30;
 
 

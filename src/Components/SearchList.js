@@ -18,7 +18,7 @@ export default class SearchList extends React.Component {
 
   render() {
     return (
-      <div className="search-results container">
+      <div className="search-results container" id="results-container">
         <form>
           <input
             onChange={this.searchTitleChanged}

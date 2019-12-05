@@ -55,3 +55,8 @@ html, #gamePage, register, login, review {
   cursor: pointer;
   
 }
+
+#root {
+  background-image: url("/src/Content/bg1.jpeg");
+
+}
