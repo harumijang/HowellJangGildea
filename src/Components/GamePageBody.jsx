@@ -1,5 +1,13 @@
 import React from "react";
 import { Router, Route, Link } from "react-router-dom";
+import ReviewService from "../Services/ReviewService";
+import GameService from "../Services/GameService";
+import GamerService from "../Services/GamerService";
+
+const reviewService = ReviewService.getInstance();
+const gameService = GameService.getInstance();
+const gamerService = GamerService.getInstance();
+
 
 let r1 = {user:"herpes_free_since_03", text:"I just wanted to have a peak into this game, being a FPS fan, and... I decided to stick around. The game is utterly fun. It really is, but on some occasions it gets tiresome, just like most of RPF/FPS games, well if you're playing for pretty damn long time. It grabbed my attention maybe because it reminds me on S.T.A.L.K.E.R., Fallout 3... and maybe little bit on Hellgate London. You know, it has a lot RPG elements... you play with the character that you choose at the start, you can't make your own character, you can just... change their clothes color. But, all those thing are justified in high-voltage, twisted and tense gameplay, really the game action is pretty cool. The more you're growing with levels... the stronger you get. Your opponents are pretty hard, they are specific, which is good point in the game, the AI is also pretty good. The music score sounds pretty swell and ominous on some occasions. The graphics are cool, like being in a comic book. The same graphics were used in new AVP (2010) I guess. You are a mercenary who fights his way to the legendary vault, full of treasure, being attacked by desert nomads, killers, psychos, spider-ants, flying Rakk things... mutants... There's also a lot of references to Mad Max for example, which I like very much. Another reason, perhaps for some people to play this game. I gladly recommend this game to those who likes post-apocalyptic games (well, it just looks visually post-apocalyptic, actually it's an another planet), you'll enjoy it."}
 
@@ -16,12 +24,13 @@ let r5 ={user:"Smoking Krills", text: "This game is bad go fuck yourself"}
 
 
 
-let reviews = [r1,r2,r3, r4, r5]
+// let reviews = [r1,r2,r3, r4, r5]
 const reviewsAllowedOnScreen = 30;
 
 
 
 class GamePageBody extends React.Component {
+  
   constructor(props) {
     super (props)
     this.state = {reviews:[]};
@@ -58,6 +67,7 @@ class GamePageBody extends React.Component {
     }
      addReview = (type) => {
        if (type != "gamer") {alert("Please sign in with a consumer account");return;}
+
        document.getElementById("addReview").style.display = "block"
      }
      
@@ -79,6 +89,7 @@ class GamePageBody extends React.Component {
        
        
      }
+
     
     render(){
     return (
@@ -145,10 +156,15 @@ class GamePageBody extends React.Component {
           <h3><strong>Reviews</strong></h3>
           <button onClick={() => this.addReview(this.props.type)} class="btn btn-primary">Add Review</button>
         </div>
-        {this.props.userId ? <div id="addReview" style={{display:"none"}} >
-         <textarea class="form-control" id="rev" rows="3"></textarea>
-        <button onClick={() => this.submitReview()} class="btn btn-primary">Submit</button>
-        </div>:null}
+
+        <div id="addReview" style={{display:"none"}} >
+         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        <button onClick={() => 
+        reviewService.createReview(document.getElementById('exampleFormControlTextarea1').value, 
+        gameService.findGameById(this.props.game.id), gamerService.findGamerById(31))} 
+        class="btn btn-primary">Submit</button>
+        </div>
+
         
         
         

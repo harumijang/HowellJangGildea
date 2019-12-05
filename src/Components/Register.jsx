@@ -21,6 +21,7 @@ class Register extends React.Component {
       if (type === "developers") {
          newUser = {username:u,password:p,games:[]}
       } else {
+        alert("hit");
         newUser = {username:u,password:p,reviews:[]}
       }
     
@@ -81,6 +82,7 @@ class Register extends React.Component {
        }
      }
        if (password.value === passwordV.value) {
+        this.newAccount(un,password,"developers")
          alert("Developer approved")
          this.newAccount(un,password,"developers")
        } else {

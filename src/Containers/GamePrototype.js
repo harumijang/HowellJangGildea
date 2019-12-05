@@ -63,7 +63,8 @@ searchGame = searchTitleChanged => this.findGameByTitle(searchTitleChanged);
             <Route  path="/profile"><Profile type={this.state.userType} username={this.state.user} setUser={this.setUser}/></Route>
             <Route path="/newGame"><NewGame userId={this.state.userId}/></Route>
              <Route path="/game" render={(game) => {
-                    return (<GamePageHeader userId={this.state.userId} type={this.state.userType} game={game.location.game} />)
+                return (<GamePageHeader userId={this.state.userId} type={this.state.userType} game={game.location.game} />)
+
                 }} />
         </Router>
 
