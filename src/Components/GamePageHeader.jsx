@@ -49,7 +49,7 @@ export default class GamePageHeader extends React.Component {
             
            <div class="d-flex"><h1>{this.props.game.rating}/5&nbsp;</h1><p>{this.props.game.ratings_count}&nbsp;ratings</p></div>
            </div>
-            <GamePageBody type={this.props.type} game={this.props.game} />
+            <GamePageBody type={this.props.type} game={this.props.game} userId={this.props.userId} />
           </div>
           <div class="col"></div>
         </div>
