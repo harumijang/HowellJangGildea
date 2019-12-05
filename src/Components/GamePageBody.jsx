@@ -157,13 +157,13 @@ class GamePageBody extends React.Component {
           <button onClick={() => this.addReview(this.props.type)} class="btn btn-primary">Add Review</button>
         </div>
 
-        <div id="addReview" style={{display:"none"}} >
+       {this.props.type == "gamer" ? <div id="addReview" style={{display:"none"}} >
          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         <button onClick={() => 
         reviewService.createReview(document.getElementById('exampleFormControlTextarea1').value, 
         gameService.findGameById(this.props.game.id), gamerService.findGamerById(31))} 
         class="btn btn-primary">Submit</button>
-        </div>
+        </div>:null}
 
         
         
