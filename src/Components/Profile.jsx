@@ -172,15 +172,15 @@ class Profile extends React.Component {
           {typeof this.props.isThirdParty.location.isThirdParty.reviews !== 'undefined' ?
           
           <div> 
-  <div class="d-flex justify-content-center"> <h1> User:&nbsp;{this.props.isThirdParty.location.isThirdParty.username}</h1></div>
-          <div class="d-flex justify-content-center"> <h2>Reviews:</h2> </div>
+  <div class="d-flex justify-content-center"> <h1 id="profile-heading"> User:&nbsp;{this.props.isThirdParty.location.isThirdParty.username}</h1></div>
+          <div class="d-flex justify-content-center"> <h2 id="profile-heading">Reviews:</h2> </div>
           {this.props.isThirdParty.location.isThirdParty.reviews.map(review => {
             return (<p class="reviewLarge">{review.reviewContent}</p>)
           })}
           </div> :
           <div> 
-  <div class="d-flex justify-content-center"> <h1> User:&nbsp;{this.props.isThirdParty.location.isThirdParty.username}</h1></div>
-          <div class="d-flex justify-content-center"> <h2>Games:</h2> </div>
+  <div class="d-flex justify-content-center"> <h1 id="profile-heading"> User:&nbsp;{this.props.isThirdParty.location.isThirdParty.username}</h1></div>
+          <div class="d-flex justify-content-center"> <h2 id="profile-heading">Games:</h2> </div>
           {this.props.isThirdParty.location.isThirdParty.games.map(game => {
             return (<p class="reviewLarge">{game.id}</p>)
           })}

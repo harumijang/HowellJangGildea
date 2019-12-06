@@ -1,3 +1,9 @@
+
+
+:root {
+  --main-bg-color: rgb(18, 27, 34);
+  --main-green: rgb(0, 223, 137);
+}
 .App {
   text-align: center;
 }
@@ -22,8 +28,8 @@
 }
 
 #header {
-    background-color:skyblue;
-    border-bottom: 2px solid black
+    /* background-color:black; */
+    border-bottom: 2px solid var(--main-bg-color)
 }
 .header6 {
     margin-top: 7px;
@@ -61,7 +67,20 @@ html, #gamePage, register, login, review {
   
 }
 
-#root {
-  background-image: url("/src/Content/bg1.jpeg");
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+  background-color: var(--main-green) !important;
+}
+
+#root {
+  background-color: var(--main-bg-color) ;
+}
+
+#profile-heading {
+  color: white;
+}
+
+html *
+{
+   font-family: Source Sans Pro !important;
 }
