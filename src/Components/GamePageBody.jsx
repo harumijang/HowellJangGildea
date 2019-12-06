@@ -146,6 +146,8 @@ class GamePageBody extends React.Component {
       
         <h3>Pictures</h3>
         {console.log(this.state.reviews)}
+        {console.log("body" + this.props.game.id + " " + this.props.userId)};
+}
         {this.removeFirstPicture().map(pic => {
                 return (<img height="108" width="192" src={pic.image}></img>)
             })}
@@ -161,21 +163,20 @@ class GamePageBody extends React.Component {
          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         <button onClick={() => 
         reviewService.createReview(document.getElementById('exampleFormControlTextarea1').value, 
-        gameService.findGameById(this.props.game.id), gamerService.findGamerById(31))} 
+        gameService.findGameById(this.props.game.id), gamerService.findGamerById(this.props.userId))} 
         class="btn btn-primary">Submit</button>
         </div>:null}
 
         
         
-        
         {this.state.reviews.map((r, index) => {
-         
+          const id = this.props.game.id
           if (index < reviewsAllowedOnScreen) {
             return (r.reviewContent.length<100 ? <div class="reviewSmall"><p >{r.reviewContent.substr(0,100)}</p></div>:  <Link to={
                     { 
                         pathname: '/review',
                         review: r,
-                        rGame: this.props.game
+                        rGame: id
                     }
                       }>
                      

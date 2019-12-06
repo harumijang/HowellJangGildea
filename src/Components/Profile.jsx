@@ -133,6 +133,7 @@ class Profile extends React.Component {
        <input type="password" class="form-control wbdv-field wbdv-password-verify"
            id="passwordVerify" placeholder="123qwe#$%"></input>
      </div>
+
      {this.props.type == "dev" ?
      <Link to="/newGame"><button class="btn btn-primary">Add Game</button></Link>:<button class="btn btn-primary" onClick={() => this.test(this.props.userId)}>View Reviews</button>}
      {this.state.user ? 
@@ -147,6 +148,7 @@ class Profile extends React.Component {
      <div id="editReview" style={{display:"none"}} >
        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea><button onClick={()=> this.updateRev()} class="btn btn-primary">UpdateReview</button></div>
      
+
    </div>
    <div class="form-group row">
      <label class="col-sm-2 col-form-label"></label>
