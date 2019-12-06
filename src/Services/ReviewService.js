@@ -23,6 +23,10 @@ createReview = (content, game, user) => {
   });
   }
 
+findAllReviewsForGame = gid =>
+fetch(`https://damp-hollows-38137.herokuapp.com/api/games/${gid}/reviews`)
+.then(response => response.json())
+
 
 findReviewById = rid => 
     fetch(`https://damp-hollows-38137.herokuapp.com/api/reviews/${rid}`)
