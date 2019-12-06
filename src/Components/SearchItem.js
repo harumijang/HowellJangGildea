@@ -4,8 +4,10 @@ import GamePrototype from "../Containers/GamePrototype";
 import GamePageHeader from "../Components/GamePageHeader";
 
 
-const SearchItem = ({ game}) => {
+const SearchItem = ({user, game}) => {
   return (
+    <div>
+    {game ?
       <div className="search-item">
         <Link to={
             { 
@@ -15,6 +17,19 @@ const SearchItem = ({ game}) => {
         }>
           {game.name}
           </Link> 
+      </div> :
+       <div className="search-item">
+        <Link to={
+            { 
+                pathname: '/profile/',
+                isThirdParty: user
+            }
+        }>
+          {user.username}
+          </Link> 
+      </div> 
+    
+    }
       </div>
   );
 };

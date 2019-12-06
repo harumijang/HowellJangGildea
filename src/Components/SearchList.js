@@ -5,7 +5,8 @@ export default class SearchList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTitle: ""
+      searchTitle: "",
+      searchUser: ""
     };
   }
 
@@ -13,11 +14,19 @@ export default class SearchList extends React.Component {
     this.setState({
       searchTitle: event.target.value
     });
-    this.props.searchGame(this.state.searchTitle);
+    //this.props.searchGame(this.state.searchTitle);
+  };
+  
+    searchTitleChangedUser = event => {
+    this.setState({
+      searchUser: event.target.value
+    });
+    //this.props.searchUser(this.state.searchUser);
   };
 
   render() {
     return (
+      <div class="d-flex">
       <div className="search-results container" id="results-container">
         <form>
           <input
@@ -25,12 +34,13 @@ export default class SearchList extends React.Component {
             value={this.state.searchTitle}
             className="form-control"
           />
+          
           <button 
             type="button"
             onClick={() => this.props.searchGame(this.state.searchTitle)}
             className="btn btn-primary"
           >
-            Search
+            Search Games
           </button>
         </form>
 
@@ -41,6 +51,32 @@ export default class SearchList extends React.Component {
             </li>
           ))}
         </ul>
+      </div>
+      <div className="search-results container" >
+        <form>
+          <input
+            id="userSearch"
+            
+            className="form-control"
+          />
+          
+          <button 
+            type="button"
+            onClick={() => this.props.searchUser(this.state.searchUser)}
+            className="btn btn-primary"
+          >
+            Search Users
+          </button>
+        </form>
+
+        <ul>
+          {this.props.users.map(user => (
+            <li>
+               <SearchItem user={user}></SearchItem>
+            </li>
+          ))}
+        </ul>
+      </div>
       </div>
     );
   }

@@ -15,6 +15,7 @@ export default class GamePrototype extends Component {
     this.state = {
       games: [],
       game: null,
+      users: [],
       user: "",
       userType: "",
       userId: 0
@@ -23,7 +24,8 @@ export default class GamePrototype extends Component {
 
   componentDidMount() {
     console.log("Component Did Mount");
-    this.findGameByTitle("borderlands");
+    //this.findGameByTitle("borderlands");
+    this.findUserByName("");
   }
     
     /*searchGame(searchTitleChanged) {
@@ -35,6 +37,7 @@ export default class GamePrototype extends Component {
   setUser = (username,type,userId) => {
       console.log('here')
       this.setState({user: username, userType: type, userId:userId});
+      
   }
     
 
@@ -48,22 +51,69 @@ export default class GamePrototype extends Component {
         });
       });
   };
+  
+  
+findUserByName = un => {
+  let y = document.getElementById("userSearch").value;
+  //alert(y)
+     fetch(`https://damp-hollows-38137.herokuapp.com/api/consumers`)
+      .then(response => response.json())
+      .then(response => {
+       console.log(response)
+       for (let i = 0; i < response.length; i++) {
+          if (response[i].username === y) {
+            let newUsers= [];
+            newUsers.push(response[i])
+            this.setState({
+              users: newUsers
+            });
+          }
+        }
+        
+      });
+       fetch(`https://damp-hollows-38137.herokuapp.com/api/developers`)
+      .then(response => response.json())
+      .then(response => {
+         console.log(response)
+        for (let i = 0; i < response.length; i++) {
+          
+          if (response[i].username === y) {
+            let newUsers= [];
+            newUsers.push(response[i])
+            this.setState({
+              users: newUsers
+            });
+          }
+        }
+        let temp = response.concat(this.state.users)
+        
+      });
+  };
 
-searchGame = searchTitleChanged => this.findGameByTitle(searchTitleChanged);
+searchGame = searchTitleChanged => {
+  this.findGameByTitle(searchTitleChanged);
+
+}
+searchUser = searchUserChanged => this.findUserByName(searchUserChanged);
 
 
   render() {
     return (
         <Router>
              <Head setUser={this.setUser} username={this.state.user} /> 
-             <Route path="/review" render={(review) => { return (<Review review={review.location.review}/>)} }/>
-             <Route exact path="/"><SearchList searchGame={this.searchGame} results={this.state.games} /></Route>
+             <Route path="/review" render={(state) => {
+            return (<Review review={state.location.review} rGame={state.location.rGame}/>)} }/>
+             <Route exact path="/"><SearchList searchUser={this.searchUser} searchGame={this.searchGame} results={this.state.games} users={this.state.users}/></Route>
             <Route username={this.state.user} path="/register"><Register setUser={this.setUser} /></Route>
             <Route path="/login"><Login  setUser={this.setUser}/></Route>
-            <Route  path="/profile"><Profile type={this.state.userType} username={this.state.user} setUser={this.setUser}/></Route>
+         
             <Route path="/newGame"><NewGame userId={this.state.userId}/></Route>
              <Route path="/game" render={(game) => {
                 return (<GamePageHeader userId={this.state.userId} type={this.state.userType} game={game.location.game} />)
+
+                }} />
+        <Route path="/profile" render={(isThirdParty) => {
+                return (<Profile userId={this.state.userId} type={this.state.userType} username={this.state.user} setUser={this.setUser} isThirdParty={isThirdParty}/> )
 
                 }} />
         </Router>

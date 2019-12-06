@@ -34,4 +34,14 @@ fetch(`https://damp-hollows-38137.herokuapp.com/api/reviews/${rid}`, {
 
 }).then(response => response.json())
 
+updateReview = ( newRev) => {
+  fetch(`https://damp-hollows-38137.herokuapp.com/api/reviews/${newRev.id}`, {
+     method: 'put',
+     body: JSON.stringify(newRev),
+     headers: {
+        'content-type': 'application/json'
+     }
+      })
+}
+
 }

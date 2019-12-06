@@ -44,10 +44,15 @@ html, #gamePage, register, login, review {
 #platformHead {
     margin-bottom: -8px;
 }
-.reviewSmall {
+.reviewSmall, .reviewLarge {
   margin: 10px;
   padding:10px;
   border: 2px solid black;
+}
+
+.reviewEdit:hover {
+  cursor: pointer;
+  background-color: lightgray;
 }
 
 .reviewSmall:hover {
