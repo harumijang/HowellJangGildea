@@ -89,7 +89,7 @@ const NewGame = (devId) => {
      <label for="stores" class="col-sm-2 col-form-label">
        Stores </label>
      <div class="col-sm-10">
-       <input type="password" class="registerForm form-control wbdv-field wbdv-password-verify"
+       <input class="registerForm form-control wbdv-field wbdv-password-verify"
            id="stores"></input>
      </div>
    </div>

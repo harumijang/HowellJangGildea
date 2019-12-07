@@ -3,7 +3,7 @@ import {Link} from "react-router-dom"
 
 const Review = ({review, rGame}) => {
   return ( 
-    <div class="container review">
+    <div  style={{color:"white"}} class="container review">
       {console.log("this is the rgame id: " + rGame.id)}
     <Link to={
             { 

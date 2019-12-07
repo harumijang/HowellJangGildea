@@ -87,7 +87,7 @@ class Profile extends React.Component {
     document.getElementById("exampleFormControlTextarea1").value = event.target.innerHTML
   }
   
-  test(id) {
+  test(id, size) {
     let gs = GamerService.getInstance()
     let user = gs.findGamerById(id).then(response => this.test2(response))
     console.log(user)
@@ -96,7 +96,14 @@ class Profile extends React.Component {
   test2(user) {
     this.setState({user:user})
     console.log(this.state.user)
-    document.getElementById("editReview").style.display = "block"
+    if (this.state.user.reviews) {
+      if (this.state.user.reviews.length > 0) {
+        document.getElementById("editReview").style.display = "block"
+      } else {
+        alert("You have no reviews")
+      }
+    }
+    
   }
   
   render () {
@@ -137,9 +144,11 @@ class Profile extends React.Component {
      {this.props.type == "dev" ?
      <Link to="/newGame"><button class="btn btn-primary">Add Game</button></Link>:<button class="btn btn-primary" onClick={() => this.test(this.props.userId)}>View Reviews</button>}
      {this.state.user ? 
-       this.state.user.reviews ? this.state.user.reviews.map(r => {
+       this.state.user.reviews ? 
+        this.state.user.reviews.length > 0 ? this.state.user.reviews.map(r => {
           return (<div id={r.id} onClick={(event) => this.selectRev(event)} class="reviewLarge reviewEdit">{r.reviewContent}</div>)      
             }) 
+     :null
      : null
      
      : null
@@ -170,19 +179,19 @@ class Profile extends React.Component {
      <div> 
           
           {typeof this.props.isThirdParty.location.isThirdParty.reviews !== 'undefined' ?
-          
+         
           <div> 
   <div class="d-flex justify-content-center"> <h1 id="profile-heading"> User:&nbsp;{this.props.isThirdParty.location.isThirdParty.username}</h1></div>
           <div class="d-flex justify-content-center"> <h2 id="profile-heading">Reviews:</h2> </div>
           {this.props.isThirdParty.location.isThirdParty.reviews.map(review => {
-            return (<p class="reviewLarge">{review.reviewContent}</p>)
+            return (<p style={{color:"white"}} class="reviewLarge">{review.reviewContent}</p>)
           })}
           </div> :
           <div> 
   <div class="d-flex justify-content-center"> <h1 id="profile-heading"> User:&nbsp;{this.props.isThirdParty.location.isThirdParty.username}</h1></div>
           <div class="d-flex justify-content-center"> <h2 id="profile-heading">Games:</h2> </div>
           {this.props.isThirdParty.location.isThirdParty.games.map(game => {
-            return (<p class="reviewLarge">{game.id}</p>)
+            return (<p style={{color:"white"}}  class="reviewLarge">{game.id}</p>)
           })}
           </div>
           

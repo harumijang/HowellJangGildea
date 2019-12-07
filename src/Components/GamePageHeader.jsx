@@ -44,10 +44,10 @@ export default class GamePageHeader extends React.Component {
           <div class="col"></div>
           <div class="col-9 gamePageBody">
           <div class="d-flex justify-content-around">
-           <h1>{this.props.game.name}</h1>
+           <h1 style={{color:"black"}} >{this.props.game.name}</h1>
            {console.log(this.props.game)}
             
-           <div class="d-flex"><h1>{this.props.game.rating}/5&nbsp;</h1><p>{this.props.game.ratings_count}&nbsp;ratings</p></div>
+           <div class="d-flex"><h1 style={{color:"black"}}>{this.props.game.rating}/5&nbsp;</h1><p >{this.props.game.ratings_count}&nbsp;ratings</p></div>
            </div>
             <GamePageBody userId={this.props.userId} type={this.props.type} game={this.props.game} />
 
