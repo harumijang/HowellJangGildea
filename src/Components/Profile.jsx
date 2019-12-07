@@ -9,7 +9,8 @@ class Profile extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      user: null
+      user: null,
+      games: []
     };
   }
     authenticate() {
@@ -28,6 +29,17 @@ class Profile extends React.Component {
     
     //document.getElementById("login").style.display = "block";
     //document.getElementById("authenticate").style.display = "none";
+    
+  }
+  
+  componentDidMount() {
+    if (this.props.isThirdParty.location.isThirdParty) {
+      let id = this.props.isThirdParty.location.isThirdParty.id;
+
+    fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${id}/games`)
+    .then(response => response.json())
+    .then(response => this.setState({games:response}))
+    }
     
   }
   
@@ -237,8 +249,9 @@ class Profile extends React.Component {
           </div> :
           <div> 
   <div class="d-flex justify-content-center"> <h1 id="profile-heading"> User:&nbsp;{this.props.isThirdParty.location.isThirdParty.username}</h1></div>
+            {console.log(this.props)}
           <div class="d-flex justify-content-center"> <h2 id="profile-heading">Games:</h2> </div>
-          {this.props.isThirdParty.location.isThirdParty.games.map(game => {
+          {this.state.games.map(game => {
             return (
               
               
