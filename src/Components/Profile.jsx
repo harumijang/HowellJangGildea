@@ -2,6 +2,8 @@ import React from "react";
 import {Link} from "react-router-dom"
 import GamerService from "../Services/GamerService"
 import ReviewService from "../Services/ReviewService"
+import DevService from "../Services/DevService"
+
 
 class Profile extends React.Component {
   constructor(props) {
@@ -63,39 +65,58 @@ class Profile extends React.Component {
   updateRev() {
     //alert("reviewUpdatee")
     let revs = document.getElementsByClassName("reviewEdit");
+    let rev;
     let rid;
-    let content;
+    let content = document.getElementById("exampleFormControlTextarea1").value;
     for (let i = 0; i < revs.length; i++) {
-      if (revs[i].style.backgroundColor === "lightgray") {
+      if (revs[i].style.backgroundColor == "lightgray") {
         rid = revs[i].id
-        content = revs[i].innerHTML
-      
       }
     }
+    rev = {id:rid, reviewContent:content}
+    //console.log(rev)
     let rs = ReviewService.getInstance()
-    let rev = {id: rid, reviewContent: content}
     rs.updateReview(rev)
   }
   
   selectRev(event) {
     let revs = document.getElementsByClassName("reviewEdit");
     for (let i = 0; i < revs.length; i++) {
-      revs[i].style.backgroundColor = "none"
+      revs[i].style.backgroundColor = "transparent"
     }
-    console.log(event)
+    //console.log(event)
     event.target.style.backgroundColor = "lightgray"
     document.getElementById("exampleFormControlTextarea1").value = event.target.innerHTML
   }
   
-  test(id, size) {
+  findGamer(id, size) {
     let gs = GamerService.getInstance()
     let user = gs.findGamerById(id).then(response => this.test2(response))
     console.log(user)
   }
   
+  findDev(devel) {
+    //console.log(id)
+    let ds = DevService.getInstance()
+    let dev = ds.findDevById(devel.id).then(response => this.devHelp(response))
+  }
+  
+  devHelp(user) {
+    this.setState({user:user})
+    //console.log(this.state.user)
+    if (this.state.user.games) {
+      if (this.state.user.games.length > 0) {
+        //document.getElementById("editReview").style.display = "block"
+        alert("agh")
+      } else {
+        alert("You have no games")
+      }
+    }
+  }
+  
   test2(user) {
     this.setState({user:user})
-    console.log(this.state.user)
+    //console.log(this.state.user)
     if (this.state.user.reviews) {
       if (this.state.user.reviews.length > 0) {
         document.getElementById("editReview").style.display = "block"
@@ -142,11 +163,38 @@ class Profile extends React.Component {
      </div>
 
      {this.props.type == "dev" ?
-     <Link to="/newGame"><button class="btn btn-primary">Add Game</button></Link>:<button class="btn btn-primary" onClick={() => this.test(this.props.userId)}>View Reviews</button>}
+       <div>
+     <Link to="/newGame"><button class="btn btn-primary">Add Game</button></Link>
+       <button onClick={() => this.findDev(this.props.userId)} class="btn btn-primary">Update Games</button> 
+       
+       {this.state.user ? 
+       this.state.user.games ? 
+        this.state.user.games.length > 0 ? this.state.user.games.map(r => {
+          return (
+            
+            
+            <Link to={
+            { 
+                pathname: '/updateGame/',
+                game: r
+            }
+        }>
+          <div style={{color:"white"}} id={r.id} onClick={(event) => this.selectRev(event)} class="reviewLarge reviewEdit">{r.id}</div>
+          </Link> 
+          
+          )      
+            }) 
+     :null
+     : null
+     
+     : null
+     }</div>
+       :
+       <button class="btn btn-primary" onClick={() => this.findGamer(this.props.userId)}>View Reviews</button>}
      {this.state.user ? 
        this.state.user.reviews ? 
         this.state.user.reviews.length > 0 ? this.state.user.reviews.map(r => {
-          return (<div id={r.id} onClick={(event) => this.selectRev(event)} class="reviewLarge reviewEdit">{r.reviewContent}</div>)      
+          return (<div style={{color:"white"}} id={r.id} onClick={(event) => this.selectRev(event)} class="reviewLarge reviewEdit">{r.reviewContent}</div>)      
             }) 
      :null
      : null

@@ -9,6 +9,7 @@ import Login from "../Components/Login";
 import Profile from "../Components/Profile";
 import Review from "../Components/Review";
 import NewGame from "../Components/NewGame.jsx"
+import UpdateGame from "../Components/UpdateGame.jsx"
 export default class GamePrototype extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +46,6 @@ export default class GamePrototype extends Component {
     return fetch(`https://api.rawg.io/api/games?search=${title}`)
       .then(response => response.json())
       .then(response => {
-        console.log(response.results);
         this.setState({
           games: response.results
         });
@@ -59,7 +59,6 @@ findUserByName = un => {
      fetch(`https://damp-hollows-38137.herokuapp.com/api/consumers`)
       .then(response => response.json())
       .then(response => {
-       console.log(response)
        for (let i = 0; i < response.length; i++) {
           if (response[i].username === y) {
             let newUsers= [];
@@ -74,7 +73,7 @@ findUserByName = un => {
        fetch(`https://damp-hollows-38137.herokuapp.com/api/developers`)
       .then(response => response.json())
       .then(response => {
-         console.log(response)
+         
         for (let i = 0; i < response.length; i++) {
           
           if (response[i].username === y) {
@@ -85,6 +84,7 @@ findUserByName = un => {
             });
           }
         }
+         console.log(response)
         let temp = response.concat(this.state.users)
         
       });
@@ -114,6 +114,11 @@ searchUser = searchUserChanged => this.findUserByName(searchUserChanged);
                 }} />
         <Route path="/profile" render={(isThirdParty) => {
                 return (<Profile userId={this.state.userId} type={this.state.userType} username={this.state.user} setUser={this.setUser} isThirdParty={isThirdParty}/> )
+
+                }} />
+        
+        <Route path="/updateGame" render={(gameOld) => {
+                return (<UpdateGame game={gameOld}/> )
 
                 }} />
         </Router>
