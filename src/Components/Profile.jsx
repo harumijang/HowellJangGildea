@@ -239,7 +239,20 @@ class Profile extends React.Component {
   <div class="d-flex justify-content-center"> <h1 id="profile-heading"> User:&nbsp;{this.props.isThirdParty.location.isThirdParty.username}</h1></div>
           <div class="d-flex justify-content-center"> <h2 id="profile-heading">Games:</h2> </div>
           {this.props.isThirdParty.location.isThirdParty.games.map(game => {
-            return (<p style={{color:"white"}}  class="reviewLarge">{game.id}</p>)
+            return (
+              
+              
+            
+             <Link to={
+            { 
+                pathname: '/game/' + game.id,
+                game: game
+            }
+        }>
+          <p style={{color:"white"}}  class="reviewLarge">{game.name}</p>
+          </Link> 
+              
+            )
           })}
           </div>
           

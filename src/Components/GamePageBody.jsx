@@ -24,14 +24,28 @@ class GamePageBody extends React.Component {
   }
   
     hasPicture = () => {
+      if (this.props.game.short_screenshots){
         if (this.props.game.short_screenshots.length > 0) {
             return this.props.game.short_screenshots[0].image
         } else {
             return "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png"
         }
+      } else {
+        if (this.props.game.imgURLs.length > 0) {
+          let temp = this.props.game.imgURLs.split(',')
+          return temp[0]
+        } else {
+          return "https://legacytaylorsville.com/wp-content/uploads/2015/07/No-Image-Available1.png"
+        }
+          
+      }
     }
      removeFirstPicture = () => {
         let temp = [];
+       if (this.props.game.imgURLs) {
+         temp = this.props.game.imgURLs.split(',');
+         return temp
+       }
         for (let i = 1; i < this.props.game.short_screenshots.length; i++) {
             temp.push(this.props.game.short_screenshots[i])
         }
@@ -87,11 +101,19 @@ class GamePageBody extends React.Component {
         </div>
         <div class="d-flex">
        <strong> <div>Genres:&nbsp;</div></strong>
-        {this.props.game.genres ? this.props.game.genres.map((genre, index) => {
-                if (index < this.props.game.genres.length-1) {
+        {
+            this.props.game.imgURLs ? this.props.game.genres.split(',').map((genre, index) => {
+                if (index < this.props.game.genres.split(',').length-1) {
                     return (<div>{genre.name},&nbsp;</div>)
                 } else {return (<div>{genre.name}</div>)}
-            }): null}
+            }): 
+          this.props.game.genres.map((genre, index) => {
+                if (index < this.props.game.genres.length-1) {
+                    return (<div>{genre.name},&nbsp;</div>)
+                } else {return (<div>{genre}</div>)}
+            })
+          
+          }
             </div>
         
             {this.props.game.released ? 
@@ -105,16 +127,19 @@ class GamePageBody extends React.Component {
         <div>
         <h4 id="platformHead">Platforms:&nbsp;</h4>
         <div class="d-flex flex-column">
-        {this.props.game.platforms ?
+        {typeof this.props.game.platforms == "object" ?
         this.props.game.platforms.map(plat => {
                  return (<div>{plat.platform.name}</div>)
-            }): null}
+            }): 
+        this.props.game.platforms.split(',').map(plat => {
+                 return (<div>{plat}</div>)})
+        }
     </div>
         </div>
             <div class="">
         <h4 id="platformHead">Stores:&nbsp;</h4>
         <div class="d-flex flex-column">
-        {this.props.game.stores ?
+        {typeof this.props.game.stores == "object" ?
         this.props.game.stores.map(store => {
                  return (<div>{store.store.name}</div>)
             }):null}

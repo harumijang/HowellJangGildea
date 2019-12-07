@@ -31,4 +31,14 @@ fetch(`https://damp-hollows-38137.herokuapp.com/api/games/${gid}`, {
 
 }).then(response => response.json())
 
+updateGame = (newGame, gid) => {
+  fetch(`https://damp-hollows-38137.herokuapp.com/api/consumers/${gid}`, {
+     method: 'put',
+     body: JSON.stringify(newGame),
+     headers: {
+        'content-type': 'application/json'
+     }
+      })
+}
+
 }
