@@ -15,41 +15,77 @@ class NewGame extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      dev: null
+      dev: null,
+      devs: []
   }
+  }
+  
+  componentDidMount() {
+    let ds = DevService.getInstance()
+    ds.findAllDevs().then(response => this.setState({devs:response}))
   }
     
 
   
   createNewGame() {
-    console.log(this.state.dev)
+    console.log(this.state)
+    console.log(this.props)
     let title = document.getElementById("gameTitle").value
-    let pics = document.getElementById("image").value.split(" ")
-    let relDate = document.getElementById("release").value
-    let devs = document.getElementById("devs").value.split(" ")
+    let pics = document.getElementById("image").value
+    let genres = document.getElementById("genres").value
+    let devs = document.getElementById("devs").value.split(',')
     let video = document.getElementById("video").value
-    let platforms = document.getElementById("plats").value.split(" ")
-    let stores = document.getElementById("stores").value.split(" ")
+    let platforms = document.getElementById("plats").value
+    let stores = document.getElementById("stores").value
 
-    if (title === "" || pics === "" || relDate === "") {
+    if (title === "" || pics === "") {
       alert("please fill out all required fields")
       return;
     }
+    
+    let devObjects = [];
+    let alreadyIncluded = [];
+    for (let i = 0; i < devs.length; i++) {
+      
+      let usernameLegal = false;
+      for (let j = 0; j < this.state.devs.length; j++) {
+        if (devs[i] == this.state.devs[j].username) {
+          if (!alreadyIncluded.includes(devs[i])) {
+            usernameLegal = true;
+            devObjects.push(this.state.devs[j])
+            alreadyIncluded.push(this.state.devs[j].username) 
+          }
+          
+        }
+        
+        console.log(devs[i] + "    " + this.state.devs[j].username)
+          console.log(usernameLegal)
+        
+        
+      }
+      if (!usernameLegal) {
+        alert ("at least one listed developer does not exist")
+        return;
+      }
+    }
+    
 
-    let newGameObject = {title: title, reviews: [], rating:0, rating_count: 0, date:relDate, platforms:platforms, stores:stores, devs:devs, short_screenshots:pics, videoURL: video}
+    let newGameObject = {name: title, reviews: [],  platforms:platforms, stores:stores, developers:devObjects, imgURLs:pics, videoURL: video, genres:genres}
 
     let gs = GameService.getInstance();
-    let ds = DevService.getInstance();
-    let developer = this.props.userId;
-    developer.games.push(newGameObject)
-    ds.updateDev(developer)
+    //let ds = DevService.getInstance();
+    //let developer = this.props.userId;
+    //developer.games.push(newGameObject)
+    //ds.updateDev(developer)
+    console.log(newGameObject)
     gs.createGame(newGameObject)
 
 }
   render () {
   return ( 
 <div class="newGame container">
- <h1>Create New Game</h1>
+ {console.log(this.state)}
+  <h1>Create New Game</h1>
 
    <div class="d-flex form-group row">
 
@@ -71,15 +107,15 @@ class NewGame extends React.Component {
 
      <div class="form-group row">
      <label for="images" class="col-sm-2 col-form-label">
-       Release Date *</label>
+       Genres</label>
      <div class="col-sm-10">
-       <input  type="date" class="registerForm form-control wbdv-field wbdv-password"
-           id="release"></input>
+       <input class="registerForm form-control wbdv-field wbdv-password"
+           id="genres"></input>
      </div>
    </div>
        <div class="form-group row">
      <label for="images" class="col-sm-2 col-form-label">
-       Additional Developers</label>
+      Developers (Include your own username)</label>
      <div class="col-sm-10">
        <input  type="otherImages" class="registerForm form-control wbdv-field wbdv-password"
            id="devs"></input>

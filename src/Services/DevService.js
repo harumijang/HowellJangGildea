@@ -13,6 +13,10 @@ findDevById = did =>
     fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${did}`)
     .then(response => response.json())
 
+findAllDevs = () => 
+    fetch(`https://damp-hollows-38137.herokuapp.com/api/developers`)
+    .then(response => response.json())
+
 findDevGamesById = did => 
     fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${did}/games`)
     .then(response => response.json())
