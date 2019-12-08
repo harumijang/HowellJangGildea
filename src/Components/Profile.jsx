@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 import GamerService from "../Services/GamerService"
 import ReviewService from "../Services/ReviewService"
 import DevService from "../Services/DevService"
+import UserGame from "./UserGame"
 
 
 class Profile extends React.Component {
@@ -341,7 +342,7 @@ class Profile extends React.Component {
             
              <Link to={
             { 
-                pathname: '/game/' + game.id,
+                pathname: '/userGame/' + game.id,
                 game: game
             }
         }>

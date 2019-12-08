@@ -10,6 +10,7 @@ import Profile from "../Components/Profile";
 import Review from "../Components/Review";
 import NewGame from "../Components/NewGame.jsx"
 import UpdateGame from "../Components/UpdateGame.jsx"
+import UserGame from "../Components/UserGame.jsx"
 export default class GamePrototype extends Component {
   constructor(props) {
     super(props);
@@ -119,6 +120,10 @@ searchUser = searchUserChanged => this.findUserByName(searchUserChanged);
         
         <Route path="/updateGame" render={(gameOld) => {
                 return (<UpdateGame game={gameOld}/> )
+
+                }} />
+        <Route path="/userGame" render={(gameOld) => {
+                return (<UserGame  userId={this.state.userId} type={this.state.userType} game={gameOld}/> )
 
                 }} />
         </Router>
