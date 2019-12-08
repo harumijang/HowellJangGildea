@@ -37,9 +37,10 @@ class Profile extends React.Component {
   }
   
   componentDidMount() {
+    let id = this.props.userId.id
     console.log(this.props)
     if (this.props.isThirdParty.location.isThirdParty) {
-      let id = this.props.isThirdParty.location.isThirdParty.id;
+      id = this.props.isThirdParty.location.isThirdParty.id;
       console.log(id)
     fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${id}/games`)
     .then(response => response.json())
@@ -73,7 +74,9 @@ class Profile extends React.Component {
     .then(response => response.json())
     .then(response => this.setState({devs:response}))
     
-    
+        fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${id}/games`)
+    .then(response => response.json())
+    .then(response => this.setState({games:response}))
     
     
     
@@ -91,7 +94,16 @@ class Profile extends React.Component {
     //console.log(id)
     let gs = GamerService.getInstance()
     let ds = DevService.getInstance()
-    let user = gs.findGamerById(id)
+    let type = this.props.type;
+    let user
+    if (type == "gamer") {
+      user = gs.findGamerById(id)
+    } else {
+      console.log(id)
+      user = ds.findDevById(id.id)
+    }
+    
+    
     
     let un = document.getElementById("username").value;
     let pw = document.getElementById("password").value;
@@ -131,7 +143,8 @@ class Profile extends React.Component {
     if (this.props.type == "gamer") {
       gs.updateGamer(user, id)
     } else {
-      ds.updateDev (user, id)
+      //user.games = this.state.games
+      ds.updateDev (user, id.id)
     }
   
     document.getElementById("username").value = "";
@@ -212,7 +225,7 @@ class Profile extends React.Component {
     return (
  
      <div>
-       {console.log(this.state)}
+       {console.log(this.props)}
   {!this.props.isThirdParty.location.isThirdParty ?
 <div class="register container">
   

@@ -23,9 +23,9 @@ fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${did}`, {
 
 }).then(response => response.json())
 
-updateDev = ( newUser) => {
-  console.log(newUser)
-  fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${newUser.id}`, {
+updateDev = ( newUser, id) => {
+  console.log(id)
+  fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${id}`, {
      method: 'put',
      body: JSON.stringify(newUser),
      headers: {
