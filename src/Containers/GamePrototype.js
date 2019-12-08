@@ -12,6 +12,8 @@ import NewGame from "../Components/NewGame.jsx"
 import UpdateGame from "../Components/UpdateGame.jsx"
 import UserGame from "../Components/UserGame.jsx"
 import Privacy from "../Components/Privacy"
+import Banner from "../Components/Banner"
+
 export default class GamePrototype extends Component {
   constructor(props) {
     super(props);
@@ -128,6 +130,8 @@ searchUser = searchUserChanged => this.findUserByName(searchUserChanged);
                 return (<UserGame  userId={this.state.userId} type={this.state.userType} game={gameOld}/> )
 
                 }} />
+             <Banner></Banner>
+
         </Router>
 
     );
