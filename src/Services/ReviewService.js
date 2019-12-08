@@ -10,14 +10,10 @@ export default class ReviewService {
     }
 
 
-createReview = (content, game, user) => {
-    console.log(content + " gameName: " + game.name + " userName: " + user.name)
-    let newReview;
-    newReview = {reviewContent:content, game: game ,consumer:user}
-   fetch("https://damp-hollows-38137.herokuapp.com/api/reviews", {
-    // fetch(`http://localhost:8080/api/reviews`, {
+createReview = (content, gameID, userID) => {
+    fetch(`http://localhost:8080/api/games/${gameID}/reviews`, {
      method: 'post',
-     body: JSON.stringify(newReview),
+     body: JSON.stringify({content:content, gid: gameID, uid: userID}),
      headers: {
             'content-type': 'application/json'
      }
