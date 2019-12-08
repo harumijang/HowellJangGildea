@@ -11,6 +11,7 @@ import Review from "../Components/Review";
 import NewGame from "../Components/NewGame.jsx"
 import UpdateGame from "../Components/UpdateGame.jsx"
 import UserGame from "../Components/UserGame.jsx"
+import Privacy from "../Components/Privacy"
 export default class GamePrototype extends Component {
   constructor(props) {
     super(props);
@@ -107,6 +108,7 @@ searchUser = searchUserChanged => this.findUserByName(searchUserChanged);
              <Route exact path="/"><SearchList searchUser={this.searchUser} searchGame={this.searchGame} results={this.state.games} users={this.state.users}/></Route>
             <Route username={this.state.user} path="/register"><Register setUser={this.setUser} /></Route>
             <Route path="/login"><Login  setUser={this.setUser}/></Route>
+        <Route path="/privacy"><Privacy  /></Route>
          
             <Route path="/newGame"><NewGame userId={this.state.userId}/></Route>
              <Route path="/game" render={(game) => {

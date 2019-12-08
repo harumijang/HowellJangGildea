@@ -80,7 +80,7 @@ html, #gamePage, register, login, review {
   color: white;
 }
 
-h1, label {
+h1, label, .priv {
   color: white
 }
 

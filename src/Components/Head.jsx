@@ -8,6 +8,7 @@ const Head = ({username, setUser}) => {
     return (
         <div class="d-flex justify-content-between" id="header">
         <Link to="/"><img src={logo} height="92" width="400"/></Link>
+        <Link to="/privacy">Privacy Policy</Link>
         <div class="d-flex">
           {!username ? <div class="d-flex">
         <Link to="/login"><h4 id="login_register" class="header6">Login  </h4></Link>
