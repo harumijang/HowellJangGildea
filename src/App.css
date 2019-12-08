@@ -92,3 +92,8 @@ html *
 {
    font-family: Source Sans Pro !important;
 }
+
+#banner-pic {
+pointer-events: none;
+user-select: none;
+}
