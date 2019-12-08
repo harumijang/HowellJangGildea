@@ -10,7 +10,11 @@ class Profile extends React.Component {
     super(props)
     this.state = {
       user: null,
-      games: []
+      games: [],
+      consumers: [],
+      devs: [],
+      ifIsGamer: null,
+      ifIsDev:null
     };
   }
     authenticate() {
@@ -33,18 +37,60 @@ class Profile extends React.Component {
   }
   
   componentDidMount() {
+    console.log(this.props)
     if (this.props.isThirdParty.location.isThirdParty) {
       let id = this.props.isThirdParty.location.isThirdParty.id;
-
+      console.log(id)
     fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${id}/games`)
     .then(response => response.json())
     .then(response => this.setState({games:response}))
+    
+        fetch(`https://damp-hollows-38137.herokuapp.com/api/consumers`)
+    .then(response => response.json())
+    .then(response => this.setState({consumers:response}))
+
+   
+    if (this.props.isThirdParty.location.isThirdParty.reviews) {
+        fetch(`https://damp-hollows-38137.herokuapp.com/api/consumers/${id}`)
+      .then(response => response.json())
+      .then(response => this.setState({ifIsGamer:response}))
+    } else {
+        fetch(`https://damp-hollows-38137.herokuapp.com/api/developers/${id}`)
+      .then(response => response.json())
+      .then(response => this.setState({ifIsDev:response}))
     }
+    
+    //let user = gs.findGamerById(id).
+   // then(response => this.whatType(response))
+    
+    }
+    
+     fetch(`https://damp-hollows-38137.herokuapp.com/api/consumers`)
+    .then(response => response.json())
+    .then(response => this.setState({consumers:response}))
+     
+      fetch(`https://damp-hollows-38137.herokuapp.com/api/developers`)
+    .then(response => response.json())
+    .then(response => this.setState({devs:response}))
+    
+    
+    
+    
+    
     
   }
   
-  updateConsumer(id) {
+  whatType(user) {
+    if (user.reviews) {
+      this.setState({isIsGamer:user})
+    } 
+    //if (user.)
+  }
+  
+  updateUser(id) {
+    //console.log(id)
     let gs = GamerService.getInstance()
+    let ds = DevService.getInstance()
     let user = gs.findGamerById(id)
     
     let un = document.getElementById("username").value;
@@ -53,7 +99,7 @@ class Profile extends React.Component {
     
     let newUser;
     
-    if (pw === "" && pwv === "" && un === "") {
+    if (pw === "" || pwv === "" || un === "") {
       alert("Fill out fields to update profile");
       return;
     }
@@ -63,13 +109,36 @@ class Profile extends React.Component {
       return;
     }
     
-    if (un !== "") {
+   
+      for (let i = 0; i < this.state.consumers.length; i++) {
+        if (this.state.consumers[i].username == un && this.props.username != un) {
+          alert("username taken")
+          return;
+        }
+      }
+     
+      for (let i = 0; i < this.state.devs.length; i++) {
+        if (this.state.devs[i].username == un && this.props.username != un) {
+          alert("username taken")
+          return;
+        }
+      }
+    
       user.username = un;
-    }
-    if (pw !== "") {
       user.password = pw;
+    
+    
+    if (this.props.type == "gamer") {
+      gs.updateGamer(user, id)
+    } else {
+      ds.updateDev (user, id)
     }
-    gs.updateGamer(user)
+  
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+    document.getElementById("passwordVerify").value = "";
+   alert("done")
+    //gs.updateGamer(user, id)
     
     
   }
@@ -110,16 +179,16 @@ class Profile extends React.Component {
   findDev(devel) {
     //console.log(id)
     let ds = DevService.getInstance()
-    let dev = ds.findDevById(devel.id).then(response => this.devHelp(response))
+    let dev = ds.findDevGamesById(devel.id).then(response => this.devHelp(response))
   }
   
-  devHelp(user) {
-    this.setState({user:user})
+  devHelp(games) {
+    this.setState({games:games})
     //console.log(this.state.user)
-    if (this.state.user.games) {
-      if (this.state.user.games.length > 0) {
+    if (this.state.games) {
+      if (this.state.games.length > 0) {
         //document.getElementById("editReview").style.display = "block"
-        alert("agh")
+        
       } else {
         alert("You have no games")
       }
@@ -143,6 +212,7 @@ class Profile extends React.Component {
     return (
  
      <div>
+       {console.log(this.state)}
   {!this.props.isThirdParty.location.isThirdParty ?
 <div class="register container">
   
@@ -179,9 +249,9 @@ class Profile extends React.Component {
      <Link to="/newGame"><button class="btn btn-primary">Add Game</button></Link>
        <button onClick={() => this.findDev(this.props.userId)} class="btn btn-primary">Update Games</button> 
        
-       {this.state.user ? 
-       this.state.user.games ? 
-        this.state.user.games.length > 0 ? this.state.user.games.map(r => {
+       {this.state.games ? 
+       this.state.games ? 
+        this.state.games.length > 0 ? this.state.games.map(r => {
           return (
             
             
@@ -224,7 +294,7 @@ class Profile extends React.Component {
      <div class="col-sm-10">
        
          <div class="d-flex">
-          <button onClick={() => this.updateConsumer(this.props.UserId)} class="btn btn-primary wbdv-button wbdv-register">Update Profile!</button>
+          <button onClick={() => this.updateUser(this.props.userId)} class="btn btn-primary wbdv-button wbdv-register">Update Profile!</button>
        <Link to="/"><button class="btn btn-primary wbdv-button wbdv-register">Return Home</button></Link>
        </div>
        <div class="row">

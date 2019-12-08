@@ -20,8 +20,8 @@ fetch(`https://damp-hollows-38137.herokuapp.com/api/consumers/${gid}`, {
 
 }).then(response => response.json())
 
-updateGamer = ( newUser) => {
-  fetch(`https://damp-hollows-38137.herokuapp.com/api/consumers/${newUser.id}`, {
+updateGamer = ( newUser, id) => {
+  fetch(`https://damp-hollows-38137.herokuapp.com/api/consumers/${id}`, {
      method: 'put',
      body: JSON.stringify(newUser),
      headers: {
