@@ -145,7 +145,13 @@ class GamePageBody extends React.Component {
         <button onClick={() => 
         reviewService.createReview(document.getElementById('exampleFormControlTextarea1').value, 
         this.props.game.id, this.props.userId,
-        document.getElementById("addReview").style.display = "none")} 
+        document.getElementById("addReview").style.display = "none").then 
+        (response => {
+          this.setState({
+            reviews: response
+          })
+      
+      })} 
         class="btn btn-primary">Submit</button>
         </div>:null}
 
