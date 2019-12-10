@@ -24,6 +24,7 @@ export default class UserGame extends React.Component {
     let temp = gameId.split("/")
     gameId = temp[temp.length-1]
     //newGame: this.findGameById(gameId)
+    {console.log("huh" + this.props.game.location.game.id)}
     
     fetch(`https://damp-hollows-38137.herokuapp.com/api/games/${this.props.game.location.game.id}/reviews`)
       .then(res => res.json())
@@ -172,10 +173,15 @@ export default class UserGame extends React.Component {
          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
         <button onClick={() => 
         reviewService.createReview(document.getElementById('exampleFormControlTextarea1').value, 
-        gameService.findGameById(this.props.game.location.game.id), gamerService.findGamerById(this.props.userId),
-        document.getElementById("addReview").style.display = "none"),
-                                     console.log(this.props.game.location.game.id)
-             } 
+        this.props.game.location.game.id, this.props.userId,
+        document.getElementById("addReview").style.display = "none").then 
+        (response => {
+          this.setState({
+            reviews: response
+          })
+      
+      })} 
+             
         class="btn btn-primary">Submit</button>
         </div>:null}
 
