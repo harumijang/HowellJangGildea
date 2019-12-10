@@ -11,8 +11,8 @@ export default class ReviewService {
 
 
 createReview = (content, gameID, userID) => 
-    // fetch(`https://damp-hollows-38137.herokuapp.com/api/games/${gameID}/reviews`, {
-    fetch(`http://localhost:8080/api/games/${gameID}/reviews`, {
+    fetch(`https://damp-hollows-38137.herokuapp.com/api/games/${gameID}/reviews`, {
+    // fetch(`http://localhost:8080/api/games/${gameID}/reviews`, {
      method: 'post',
      body: JSON.stringify({content:content, gid: gameID, uid: userID}),
      headers: {

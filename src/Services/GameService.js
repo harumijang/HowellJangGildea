@@ -9,10 +9,12 @@ export default class GameService {
     }
 
 
-createGame = (newGame) => {
-   fetch("https://damp-hollows-38137.herokuapp.com/api/games", {
+createGame = (newGame, devObjects) => {
+//    fetch("https://damp-hollows-38137.herokuapp.com/api/games", {
+ fetch(`http://localhost:8080/api/games`, {
+
      method: 'post',
-     body: JSON.stringify(newGame),
+     body: JSON.stringify(newGame, devObjects),
      headers: {
             'content-type': 'application/json'
      }

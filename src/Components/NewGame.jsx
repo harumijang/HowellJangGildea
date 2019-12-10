@@ -70,15 +70,17 @@ class NewGame extends React.Component {
     }
     
 
-    let newGameObject = {name: title, reviews: [],  platforms:platforms, stores:stores, developers:devObjects, imgURLs:pics, videoURL: video, genres:genres}
+    let newGameObject = {name: title, reviews: [],  platforms:platforms, stores:stores, 
+      // developers:devObjects, 
+      imgURLs:pics, videoURL: video, genres:genres}
 
     let gs = GameService.getInstance();
     //let ds = DevService.getInstance();
     //let developer = this.props.userId;
     //developer.games.push(newGameObject)
     //ds.updateDev(developer)
-    console.log(newGameObject)
-    gs.createGame(newGameObject)
+    console.log("Devs " + devObjects[0].username)
+    gs.createGame(newGameObject, devObjects)
 
 }
   render () {
