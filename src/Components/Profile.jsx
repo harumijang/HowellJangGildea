@@ -275,7 +275,7 @@ class Profile extends React.Component {
                 game: r
             }
         }>
-          <div style={{color:"white"}} id={r.name} onClick={(event) => this.selectRev(event)} class="reviewLarge reviewEdit">{r.id}</div>
+          <div style={{color:"white"}} id={r.name} onClick={(event) => this.selectRev(event)} class="reviewLarge reviewEdit">{r.name}</div>
           </Link> 
           
           )      
